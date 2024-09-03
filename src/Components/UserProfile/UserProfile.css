@@ -1,0 +1,43 @@
+.BootCard_UserDetails{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.col{
+    display: flex;
+}
+
+.card-body .card-text{
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.card-body .card-title{
+    display:flex;
+    justify-content: center;
+}
+
+.UserBootPara{
+    margin: 0;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: 800;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+}
+
+.UserProfile_Heading {
+    background: linear-gradient(90deg, #0A5CA5, #063970);
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.UserProfile_Heading > h2{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 2rem 0;
+}

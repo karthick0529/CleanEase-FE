@@ -1,0 +1,20 @@
+.UserAddReview_Heading{
+    background: linear-gradient(90deg, #0A5CA5, #063970);
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.UserAddReview_Heading > h2{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 2rem 0;
+}
+
+.UserAddReview_BackButton{
+    display: flex;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(90deg, #0A5CA5, #063970);
+}

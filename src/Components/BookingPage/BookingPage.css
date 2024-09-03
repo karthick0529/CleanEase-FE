@@ -1,0 +1,26 @@
+.Date, .Time{
+    width: 100%;
+    background-color: gray;
+    min-height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+#Time, #Date{
+    border: none;
+    outline: none;
+    font-size: 18px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.Date_lab, .Time_lab{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3px;
+    font-size: 1rem;
+}

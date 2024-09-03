@@ -1,0 +1,47 @@
+.UserBooking_Error{
+    background: #f1f1f1;
+    display: flex;
+    width: 100%;
+    min-height: 25vh;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    color: gray;
+    margin-bottom: 1rem;
+}
+
+.Table_Container{
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.Table_Container > h3{
+    font-size: 2rem;
+    text-shadow: 0px 0px 5px  gray;
+}
+
+.Table_Top{
+    display: flex;
+    width:100%;
+    background-color: #f1f1f1;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+.UserBooking_Heading{
+    background: linear-gradient(90deg, #0A5CA5, #063970);
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.UserBooking_Heading > h2{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 2rem 0;
+}

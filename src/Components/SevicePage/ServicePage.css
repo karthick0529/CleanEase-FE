@@ -1,0 +1,143 @@
+.SubData_Container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.SubService_Img {
+  width: 100%;
+  height: 40vh;
+}
+
+.SubData_Card {
+  max-width: 17rem;
+  background-color: #f1f1f1af;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem;
+  margin: 2rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.SubData_Card_Text {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.SubData_Card_Numbers {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+.SubData_Card_Duration,
+.SubData_Card_Amount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: 700;
+}
+
+.text {
+  color: #6c757d;
+}
+
+.text1 {
+  /* color:#007bff */
+  color: #ff5733;
+}
+
+.Action_Button > button {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Action_Button {
+  background-color: #28a745;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.Action_Button:hover {
+  transform: scale(1.05);
+  background-color: #218838;
+}
+
+.SubData_Heading {
+    background: linear-gradient(90deg, #0A5CA5, #063970);
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.SubData_Heading > h2{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 2rem 0;
+}
+
+.SubData_ActionPart{
+    background-color: #bcd6fe41;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: auto;
+    min-height: 20vh;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding:10px 0px;
+}
+
+.SubData_Search_Sort{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: auto;
+}
+
+.SubData_Search{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px 20px;
+    justify-content: center;
+}
+
+.SubData_Sort{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.Review_Page{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+}

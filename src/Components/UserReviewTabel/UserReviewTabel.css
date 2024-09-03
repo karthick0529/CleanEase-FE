@@ -1,0 +1,32 @@
+.UserReview_Error{
+    background: #f1f1f1;
+    display: flex;
+    width: 100%;
+    min-height: 25vh;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    color: gray;
+    margin-bottom: 1rem;
+}
+
+.UserReview_Heading{
+    background: linear-gradient(90deg, #0A5CA5, #063970);
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.UserReview_Heading >  h2{
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 2rem 0;
+}
+
+.UserReview_BackButton{
+    display: flex;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(90deg, #0A5CA5, #063970);
+}
