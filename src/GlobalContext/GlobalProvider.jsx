@@ -31,12 +31,12 @@ function GlobalProvider({ children }) {
   if(localStorage.token){
       const jwt = localStorage.getItem('token');
       loginUser = jwtDecode(jwt)
-      if(Date.now() < loginUser.exp*1000){
+      // if(Date.now() < loginUser.exp*1000){
         setAuthToken(jwt);
-      } else {
-        alert("Token Expired Please login again!");
-        navigate('/logout');
-      }
+      // } else {
+      //   alert("Token Expired Please login again!");
+        // navigate('/logout');
+      // }
   }
 
   useEffect(()=>{
@@ -85,7 +85,7 @@ function GlobalProvider({ children }) {
     const order = response.data;
 
     const options = {
-      key: "rzp_test_rH4grrSuPDLyeO", // Replace with your test key ID
+      key: "rzp_test_3WUTrpolUhcOdV", // Replace with your test key ID
       amount: order.amount,
       currency: order.currency,
       name: "CleanEase@Corporation",
@@ -206,7 +206,8 @@ function GlobalProvider({ children }) {
 
 // SOCKET.IO  //NOTIFICATION
 useEffect(() => {
-  const socket = io("https://cleanease-backend-780q.onrender.com", {
+  // const socket = io("https://cleanease-backend-780q.onrender.com", {
+      const socket = io("http://localhost:3000", {
     transports: ["websocket", "polling"],
     withCredentials: true,
   });
