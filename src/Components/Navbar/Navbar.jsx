@@ -17,6 +17,7 @@ import {
   PermContactCalendar as PermContactCalendarIcon,
   AccountCircle as AccountCircleIcon,
   CollectionsBookmark as CollectionsBookmarkIcon,
+  Checklist as ChecklistIcon,
   Notifications as NotificationsIcon,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -41,6 +42,7 @@ function Navbar({ value, setValue }) {
       name: "Bookings",
       path: "/user-bookings",
     },
+    { icon: <ChecklistIcon />, name: "Checklist", path: "/user-checklist" },
   ];
 
   const noUserNavigatePath = [

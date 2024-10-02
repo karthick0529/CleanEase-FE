@@ -40,22 +40,53 @@ function DrawerCompo({ data }) {
           }}
         >
           <List>
-            {data.map((ele) => (
-              <ListItem key={ele.name} disablePadding>
-                <ListItemButton
-                  onClick={() => navigate(`${ele.path}`)}
-                  sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
-                >
-                  <ListItemIcon sx={{ color: "white" }}>
-                    {ele.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={ele.name} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            {data.length === 3 &&
+              data.map((ele) => (
+                <ListItem key={ele.name} disablePadding>
+                  <ListItemButton
+                    onClick={() => navigate(`${ele.path}`)}
+                    sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
+                  >
+                    <ListItemIcon sx={{ color: "white" }}>
+                      {ele.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={ele.name} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+
+            {data.length === 4 &&
+              data.map((ele) => (
+                <ListItem key={ele.name} disablePadding>
+                  <ListItemButton
+                    onClick={() => navigate(`${ele.path}`)}
+                    sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
+                  >
+                    <ListItemIcon sx={{ color: "white" }}>
+                      {ele.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={ele.name} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+
+            {data.length === 6 &&
+              data.map((ele) => (
+                <ListItem key={ele.name} disablePadding>
+                  <ListItemButton
+                    onClick={() => navigate(`${ele.path}`)}
+                    sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
+                  >
+                    <ListItemIcon sx={{ color: "white" }}>
+                      {ele.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={ele.name} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
           </List>
           <Divider />
-          {data.length <= 3 && (
+          {data.length === 3 && (
             <List>
               <ListItem disablePadding>
                 <ListItemButton
@@ -81,7 +112,7 @@ function DrawerCompo({ data }) {
               </ListItem>
             </List>
           )}
-          {data.length > 3 && (
+          {data.length === 6 && (
             <List>
               <ListItem disablePadding>
                 <ListItemButton
@@ -112,6 +143,7 @@ function DrawerCompo({ data }) {
               </ListItem>
             </List>
           )}
+
           {data.length === 4 && (
             <List>
               <ListItem disablePadding>
@@ -129,8 +161,12 @@ function DrawerCompo({ data }) {
           )}
         </Drawer>
       </Box>
-
-      <IconButton onClick={() => setOpenDrawer(true)} color="inherit">
+      <IconButton
+        sx={{ marginLeft: "auto" }}
+        color="inherit"
+        size="large"
+        onClick={() => setOpenDrawer(!openDrawer)}
+      >
         <MenuIcon />
       </IconButton>
     </>

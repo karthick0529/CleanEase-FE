@@ -19,6 +19,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Ensure you have this for toast notifications
 
 function UserBooking() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function UserBooking() {
 
   useEffect(() => {
     getUserBookings();
-  }, []);
+  }, [getUserBookings]);
 
   const handleSelect = (e) => {
     setSortByServiceType(e.target.value);
@@ -42,7 +43,7 @@ function UserBooking() {
   };
 
   useEffect(() => {
-    if (bookingData.length > 0) {
+    if (bookingData && bookingData.length > 0) {
       let filteredData = bookingData;
 
       if (sortByServiceType !== "All") {
@@ -58,6 +59,8 @@ function UserBooking() {
       }
 
       setMainData(filteredData);
+    } else {
+      setMainData([]); // Set mainData to an empty array if bookingData is undefined or empty
     }
   }, [bookingData, sortByServiceType, filterByStatus]);
 
@@ -196,7 +199,7 @@ function UserBooking() {
               </TableCell>
             </TableRow>
           </TableHead>
-          {bookingData.length > 0 ? (
+          {mainData.length > 0 ? (
             <TableBody>
               {mainData.map((row) => (
                 <TableRow
@@ -279,15 +282,21 @@ function UserBooking() {
               ))}
             </TableBody>
           ) : (
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "2rem",
-                fontSize: "20px",
-              }}
-            >
-              No Data Found
-            </div>
+            <TableBody>
+              <TableRow>
+                <TableCell colSpan={11} style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginTop: "2rem",
+                      fontSize: "20px",
+                    }}
+                  >
+                    No Data Found
+                  </div>
+                </TableCell>
+              </TableRow>
+            </TableBody>
           )}
         </Table>
       </TableContainer>
