@@ -27,7 +27,7 @@ function Home() {
 
   useEffect(() => {
     if (loginUser) {
-      if (loginUser.role == "Admin") {
+      if (loginUser.role === "Admin") {
         setAdminView(true);
       } else {
         setAdminView(false);
@@ -41,7 +41,7 @@ function Home() {
         <>
           <CorosalCompo />
           <header className="hero-section">
-            <div class="hero-content">
+            <div className="hero-content">
               <h1>✨ Your Clean Home Starts Here ✨</h1>
               <p>🧹 Professional cleaning services at your fingertips 🧽</p>
             </div>
@@ -106,11 +106,9 @@ function Home() {
 
 export default Home;
 
-//{ totalUsers, totalBookings, bookingsData }
-
 const AdminDashboard = () => {
   const [totalBookings, setTotalBookings] = useState(0);
-  const [totalUsers, setTotlUsers] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
   const [userBookingsDetails, setUserBookingsDetails] = useState([]);
 
   useEffect(() => {
@@ -120,18 +118,30 @@ const AdminDashboard = () => {
   }, []);
 
   const getTotalBookingsAdmin = async () => {
-    const { data } = await http.get("/admin/get-bookings");
-    setTotalBookings(data.All_Users_Bookings.length);
+    try {
+      const { data } = await http.get("/admin/get-bookings");
+      setTotalBookings(data.All_Users_Bookings.length);
+    } catch (error) {
+      console.error("Error fetching total bookings:", error);
+    }
   };
 
   const getTotalUsersAdmin = async () => {
-    const { data } = await http.get("/admin/get-total-users");
-    setTotlUsers(data.TotalUsersDetail.length);
+    try {
+      const { data } = await http.get("/admin/get-total-users");
+      setTotalUsers(data.TotalUsersDetail.length);
+    } catch (error) {
+      console.error("Error fetching total users:", error);
+    }
   };
 
   const getUsersWithBookings = async () => {
-    const { data } = await http.get("/admin/get-users-with-booking");
-    setUserBookingsDetails(data.UsersWithBookingData);
+    try {
+      const { data } = await http.get("/admin/get-users-with-booking");
+      setUserBookingsDetails(data.UsersWithBookingData);
+    } catch (error) {
+      console.error("Error fetching users with bookings:", error);
+    }
   };
 
   return (
@@ -158,33 +168,6 @@ const AdminDashboard = () => {
     </div>
   );
 };
-
-// const BookingsBarChart = ({ data }) => {
-//   return (
-//     <div style={{ width: '100%', height: 400 }}>
-//       <ResponsiveContainer>
-//         <BarChart
-//           width={500}
-//           height={300}
-//           data={data}
-//           margin={{
-//             top: 20,
-//             right: 30,
-//             left: 20,
-//             bottom: 5,
-//           }}
-//         >
-//           <CartesianGrid strokeDasharray="3 3" />
-//           <XAxis dataKey="_id" label={{ value: 'Username', position: 'insideBottom', offset: -5 }} />
-//           <YAxis label={{ value: 'Total Bookings', angle: -90, position: 'insideLeft' }} />
-//           <Tooltip />
-//           <Legend />
-//           <Bar dataKey="bookings" fill="#8884d8" />
-//         </BarChart>
-//       </ResponsiveContainer>
-//     </div>
-//   );
-// };
 
 const UserBookingsTable = ({ data }) => {
   return (

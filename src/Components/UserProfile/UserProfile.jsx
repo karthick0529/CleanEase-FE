@@ -11,9 +11,6 @@ import {
   Grid,
   Avatar,
 } from "@mui/material";
-import BootCard from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import { toast } from "react-toastify";
 import "./UserProfile.css"; // Import the custom CSS
 
@@ -27,9 +24,9 @@ function UserProfile() {
   } = useGlobal();
 
   const [isEditing, setIsEditing] = useState(false);
-  const [firstname, setFirstName] = useState(null);
-  const [lastname, setLastName] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [firstname, setFirstName] = useState(""); // Default to empty string
+  const [lastname, setLastName] = useState(""); // Default to empty string
+  const [email, setEmail] = useState(""); // Default to empty string
   const [userTotalBookings, setUserTotalBookings] = useState(0);
   const [userOngoingBooking, setUserOngoingBooking] = useState(0);
   const [userCompletedBooking, setUserCompletedBooking] = useState(0);
@@ -38,7 +35,7 @@ function UserProfile() {
   useEffect(() => {
     getUserProfile();
     getUserBookings();
-  }, []);
+  }, [getUserProfile, getUserBookings]); // Added dependencies
 
   useEffect(() => {
     if (user) {
@@ -48,16 +45,9 @@ function UserProfile() {
     }
     if (bookingData.length > 0) {
       setUserTotalBookings(bookingData.length);
-      const ongoingStat = bookingData.filter((ele) => ele.status === "Ongoing");
-      setUserOngoingBooking(ongoingStat.length);
-      const completedStat = bookingData.filter(
-        (ele) => ele.status === "Completed"
-      );
-      setUserCompletedBooking(completedStat.length);
-      const notCompletedStat = bookingData.filter(
-        (ele) => ele.status === "Not Completed"
-      );
-      setUserPendingBooking(notCompletedStat.length);
+      setUserOngoingBooking(bookingData.filter((ele) => ele.status === "Ongoing").length);
+      setUserCompletedBooking(bookingData.filter((ele) => ele.status === "Completed").length);
+      setUserPendingBooking(bookingData.filter((ele) => ele.status === "Not Completed").length);
     }
   }, [user, bookingData]);
 
@@ -74,6 +64,10 @@ function UserProfile() {
     }
     try {
       await updateUserProfile(firstname, lastname, email);
+      toast.success("Profile updated successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+      });
     } catch (err) {
       if (err.message === "Network Error") {
         toast.error("Connection timeout! DB not responding", {
@@ -81,7 +75,7 @@ function UserProfile() {
           autoClose: 5000,
         });
       } else if (err.response && err.response.status === 400) {
-        toast.error(err.response.data, {
+        toast.error(err.response.data.message || "Bad request", {
           position: "top-right",
           autoClose: 5000,
         });
@@ -128,10 +122,6 @@ function UserProfile() {
             animation: slideIn 1s ease-out;
           }
 
-          .card-slide {
-            animation: fadeInAnimation 0.6s ease-out;
-          }
-
           .fadeIn-card {
             animation: fadeInAnimation 0.6s ease-out;
           }
@@ -168,53 +158,35 @@ function UserProfile() {
           backgroundColor: "whitesmoke",
         }}
       >
-        <Row xs={1} md={2} className="g-4">
+        <Grid container spacing={2}>
           {[
-            "Total Bookings",
-            "Total Completed Bookings",
-            "Total Ongoing Bookings",
-            "Total Pending Services",
-          ].map((text, index) => (
-            <Col key={index}>
-              <BootCard
-                border="light"
-                style={{
-                  width: "100%",
-                  margin: "0 1rem",
+            { label: "Total Bookings", value: userTotalBookings },
+            { label: "Total Completed Bookings", value: userCompletedBooking },
+            { label: "Total Ongoing Bookings", value: userOngoingBooking },
+            { label: "Total Pending Services", value: userPendingBooking },
+          ].map((item, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <Card
+                sx={{
+                  padding: 2,
+                  textAlign: "center",
                   backgroundColor: "#e0f7fa", // Light blue background
                   color: "#333",
                   fontFamily: `"Roboto", "Arial", sans-serif`,
                   animation: "fadeInAnimation 0.6s ease-out",
                 }}
-                className="card-slide"
+                className="fadeIn-card"
               >
-                <BootCard.Body style={{ textAlign: "center" }}>
-                  <BootCard.Text style={{ fontWeight: "bold" }}>
-                    {text} :
-                  </BootCard.Text>
-                  <BootCard.Title>
-                    <p
-                      style={{
-                        color: "#333",
-                        fontSize: "2rem",
-                        fontWeight: "bold",
-                        margin: "0",
-                      }}
-                    >
-                      {index === 0
-                        ? userTotalBookings
-                        : index === 1
-                        ? userCompletedBooking
-                        : index === 2
-                        ? userOngoingBooking
-                        : userPendingBooking}
-                    </p>
-                  </BootCard.Title>
-                </BootCard.Body>
-              </BootCard>
-            </Col>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  {item.label}:
+                </Typography>
+                <Typography variant="h4" sx={{ color: "#333", fontWeight: "bold" }}>
+                  {item.value}
+                </Typography>
+              </Card>
+            </Grid>
           ))}
-        </Row>
+        </Grid>
       </div>
 
       <Grid container justifyContent="center" sx={{ padding: 1 }}>
@@ -303,11 +275,8 @@ function UserProfile() {
                 sx={{
                   backgroundColor: "#007bff", // Blue button color
                   color: "white",
-                  "&:hover": {
-                    backgroundColor: "#0056b3", // Darker blue on hover
-                  },
+                  "&:hover": { backgroundColor: "#0056b3" },
                 }}
-                className="scale-button"
                 onClick={handleSave}
               >
                 Save
@@ -315,15 +284,13 @@ function UserProfile() {
             ) : (
               <Button
                 size="small"
-                sx={{
-                  backgroundColor: "#007bff",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "#0056b3",
-                  },
-                }}
-                className="scale-button"
                 onClick={handleEditToggle}
+                className="scale-button" // Added scale button class
+                sx={{
+                  backgroundColor: "#28a745", // Green button color
+                  color: "white",
+                  "&:hover": { backgroundColor: "#218838" },
+                }}
               >
                 Edit
               </Button>

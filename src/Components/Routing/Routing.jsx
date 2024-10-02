@@ -50,7 +50,7 @@ function Routing() {
           <Route path='/user-booking/edit/:id' element={<UserBookingEdit/>}/>
           <Route path='/user-create-booking/:cleanSubCategoriesID' element={<BookingPage/>}/>
           <Route path='/user-create-review/:_id' element={<AddReview/>}/>
-          <Route path='/user-cehcklist' element={<UserCheckList/>}/>
+          {/* <Route path='/user-cehcklist' element={<UserCheckList/>}/> */}
           <Route path='/user-update-review/:_id' element={<UpdateReview/>}/>
           <Route path='/logout' element={<Logout/>}/>
         </Route>

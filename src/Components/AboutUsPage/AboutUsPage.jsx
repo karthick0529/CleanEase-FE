@@ -14,29 +14,20 @@ function AboutUsPage() {
     "Easy online booking. 💻",
     "Cleaning services that will leave a smile on your face. 😊",
   ];
+
   return (
     <Container maxWidth="lg" sx={{ mt: 5, mb: 5 }}>
       <Paper elevation={3} sx={{ padding: 4 }} className="main-paper">
-        <div class="slideshow-container">
-          <div class="slideshow">
-            <img
-              src="./About.jpg"
-              alt="About Us Hero"
-              class="slideshow-image"
-            />
-            <img
-              src="./About1.jpg"
-              alt="About Us Hero"
-              class="slideshow-image"
-            />
-            <img
-              src="./About2.jpg"
-              alt="About Us Hero"
-              class="slideshow-image"
-            />
+        {/* Slideshow Section */}
+        <div className="slideshow-container">
+          <div className="slideshow">
+            <img src="./About.jpg" alt="About Us Hero" className="slideshow-image" />
+            <img src="./About1.jpg" alt="About Us Hero" className="slideshow-image" />
+            <img src="./About2.jpg" alt="About Us Hero" className="slideshow-image" />
           </div>
         </div>
 
+        {/* Main Heading */}
         <Typography
           variant="h4"
           component="h1"
@@ -54,21 +45,21 @@ function AboutUsPage() {
           About Us
         </Typography>
 
+        {/* Subtext */}
         <Typography
           variant="subtitle1"
           style={{
-            fontSize: "1.5rem" /* Adjust font size as needed */,
-            fontWeight: 400 /* Adjust font weight as needed */,
-            color: "#0e0d0d" /* Set text color */,
-            textAlign: "center" /* Center-align the text */,
-            marginTop: "20px" /* Add margin to the top */,
-            marginBottom: "20px" /* Add margin to the bottom */,
-            lineHeight: "1.6" /* Adjust line height for readability */,
-            fontFamily: "Arial, sans-serif" /* Set the font family */,
+            fontSize: "1.5rem",
+            fontWeight: 400,
+            color: "#0e0d0d",
+            textAlign: "center",
+            marginTop: "20px",
+            marginBottom: "20px",
+            lineHeight: "1.6",
+            fontFamily: "Arial, sans-serif",
           }}
         >
-          We are dedicated to providing the best cleaning services to our
-          customers.
+          We are dedicated to providing the best cleaning services to our customers.
         </Typography>
 
         <Grid container spacing={4}>
@@ -77,21 +68,18 @@ function AboutUsPage() {
             <Paper
               elevation={2}
               sx={{ padding: 3, height: "100%" }}
-              className="mission-paper"
               style={{
                 fontFamily: "'Roboto', sans-serif",
                 padding: "24px",
-                backgroundColor: "#e0f7fa" /* Light teal */,
+                backgroundColor: "#e0f7fa",
                 borderRadius: "8px",
-                boxShadow:
-                  "0 4px 8px rgba(0, 0, 0, 0.1)" /* Shadow for depth */,
-              }} // Set the font family
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              }}
             >
               <Typography
                 variant="h5"
                 component="h2"
                 gutterBottom
-                className="section-title"
                 style={{
                   fontFamily: "'Roboto', sans-serif",
                   fontSize: "1.75rem",
@@ -99,12 +87,11 @@ function AboutUsPage() {
                   color: "#333",
                   textAlign: "center",
                   marginBottom: "16px",
-                }} // Font family for heading
+                }}
               >
                 Our Mission
               </Typography>
               <Typography
-                className="section-content"
                 style={{
                   fontFamily: "'Roboto', sans-serif",
                   fontSize: "1rem",
@@ -113,25 +100,17 @@ function AboutUsPage() {
                   textAlign: "center",
                 }}
               >
-                Our mission is to deliver top-notch cleaning services that
-                ensure a safe and clean environment for all our clients. We
-                strive for excellence in every project we undertake.
+                Our mission is to deliver top-notch cleaning services that ensure a safe and clean environment for all our clients. We strive for excellence in every project we undertake.
               </Typography>
-              {/* Image centered */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "15px",
-                }}
-              >
+              {/* Image */}
+              <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
                 <img
                   src="./About3.jpg"
                   alt="Mission"
                   style={{
                     width: "100%",
                     borderRadius: "8px",
-                    maxWidth: "300px", // Adjust the max width to control image size
+                    maxWidth: "300px",
                   }}
                 />
               </div>
@@ -143,22 +122,18 @@ function AboutUsPage() {
             <Paper
               elevation={2}
               sx={{ padding: 3, height: "100%" }}
-              className="vision-paper"
               style={{
                 fontFamily: "'Roboto', sans-serif",
-
                 padding: "24px",
-                backgroundColor: "#fff3e0" /* Light orange */,
+                backgroundColor: "#fff3e0",
                 borderRadius: "8px",
-                boxShadow:
-                  "0 4px 8px rgba(0, 0, 0, 0.1)" /* Shadow for depth */,
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
               }}
             >
               <Typography
                 variant="h5"
                 component="h2"
                 gutterBottom
-                className="section-title"
                 style={{
                   fontFamily: "'Roboto', sans-serif",
                   fontSize: "1.75rem",
@@ -171,7 +146,6 @@ function AboutUsPage() {
                 Our Vision
               </Typography>
               <Typography
-                className="section-content"
                 style={{
                   fontFamily: "'Roboto', sans-serif",
                   fontSize: "1rem",
@@ -180,25 +154,17 @@ function AboutUsPage() {
                   textAlign: "center",
                 }}
               >
-                To become the leading provider of cleaning services in the
-                industry, known for our quality, reliability, and customer
-                satisfaction.
+                To become the leading provider of cleaning services in the industry, known for our quality, reliability, and customer satisfaction.
               </Typography>
-              {/* Image centered */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "15px",
-                }}
-              >
+              {/* Image */}
+              <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
                 <img
                   src="./About4.jpg"
                   alt="Vision"
                   style={{
                     width: "100%",
                     borderRadius: "8px",
-                    maxWidth: "300px", // Adjust the max width to control image size
+                    maxWidth: "300px",
                   }}
                 />
               </div>
@@ -211,7 +177,6 @@ function AboutUsPage() {
               variant="h5"
               component="h2"
               gutterBottom
-              className="team-title"
               style={{
                 fontFamily: "'Roboto', sans-serif",
                 fontSize: "2rem",
@@ -219,7 +184,7 @@ function AboutUsPage() {
                 textAlign: "center",
                 marginBottom: "40px",
                 color: "#333",
-              }} // Center-align heading
+              }}
             >
               Meet Our Team
             </Typography>
@@ -230,8 +195,8 @@ function AboutUsPage() {
                 <Box
                   sx={{
                     "&:hover": {
-                      transform: "scale(1.05)", // Scale the card on hover
-                      transition: "transform 0.3s ease-in-out", // Smooth transition effect
+                      transform: "scale(1.05)",
+                      transition: "transform 0.3s ease-in-out",
                     },
                     height: "100%",
                   }}
@@ -242,9 +207,9 @@ function AboutUsPage() {
                       padding: 3,
                       textAlign: "center",
                       height: "100%",
-                      transition: "box-shadow 0.3s ease-in-out", // Add transition for shadow
+                      transition: "box-shadow 0.3s ease-in-out",
                       "&:hover": {
-                        boxShadow: "0 6px 18px rgba(0,0,0,0.15)", // Shadow effect on hover
+                        boxShadow: "0 6px 18px rgba(0,0,0,0.15)",
                       },
                     }}
                   >
@@ -255,7 +220,7 @@ function AboutUsPage() {
                         margin: "0 auto",
                         width: "150px",
                         height: "150px",
-                      }} // Increased size of the avatar
+                      }}
                     />
                     <Typography
                       variant="h6"
@@ -286,20 +251,19 @@ function AboutUsPage() {
                         color: "#777",
                       }}
                     >
-                      John is passionate about maintaining high standards in
-                      cleaning services and leading the team to success.
+                      John is passionate about maintaining high standards in cleaning services and leading the team to success.
                     </Typography>
                   </Paper>
                 </Box>
               </Grid>
 
-              {/* Repeat for other team members with the same Box component */}
+              {/* Team Member 2 */}
               <Grid item xs={12} sm={6} md={4}>
                 <Box
                   sx={{
                     "&:hover": {
-                      transform: "scale(1.05)", // Scale the card on hover
-                      transition: "transform 0.3s ease-in-out", // Smooth transition effect
+                      transform: "scale(1.05)",
+                      transition: "transform 0.3s ease-in-out",
                     },
                     height: "100%",
                   }}
@@ -310,9 +274,9 @@ function AboutUsPage() {
                       padding: 3,
                       textAlign: "center",
                       height: "100%",
-                      transition: "box-shadow 0.3s ease-in-out", // Add transition for shadow
+                      transition: "box-shadow 0.3s ease-in-out",
                       "&:hover": {
-                        boxShadow: "0 6px 18px rgba(0,0,0,0.15)", // Shadow effect on hover
+                        boxShadow: "0 6px 18px rgba(0,0,0,0.15)",
                       },
                     }}
                   >
@@ -323,7 +287,7 @@ function AboutUsPage() {
                         margin: "0 auto",
                         width: "150px",
                         height: "150px",
-                      }} // Increased size of the avatar
+                      }}
                     />
                     <Typography
                       variant="h6"
@@ -345,7 +309,7 @@ function AboutUsPage() {
                         color: "#555",
                       }}
                     >
-                      Operations Manager
+                      COO & Co-Founder
                     </Typography>
                     <Typography
                       style={{
@@ -354,8 +318,7 @@ function AboutUsPage() {
                         color: "#777",
                       }}
                     >
-                      Jane ensures that all operations run smoothly and
-                      efficiently, ensuring customer satisfaction at every step.
+                      Jane brings operational expertise to ensure every project runs smoothly from start to finish.
                     </Typography>
                   </Paper>
                 </Box>
@@ -366,8 +329,8 @@ function AboutUsPage() {
                 <Box
                   sx={{
                     "&:hover": {
-                      transform: "scale(1.05)", // Scale the card on hover
-                      transition: "transform 0.3s ease-in-out", // Smooth transition effect
+                      transform: "scale(1.05)",
+                      transition: "transform 0.3s ease-in-out",
                     },
                     height: "100%",
                   }}
@@ -378,20 +341,20 @@ function AboutUsPage() {
                       padding: 3,
                       textAlign: "center",
                       height: "100%",
-                      transition: "box-shadow 0.3s ease-in-out", // Add transition for shadow
+                      transition: "box-shadow 0.3s ease-in-out",
                       "&:hover": {
-                        boxShadow: "0 6px 18px rgba(0,0,0,0.15)", // Shadow effect on hover
+                        boxShadow: "0 6px 18px rgba(0,0,0,0.15)",
                       },
                     }}
                   >
                     <Avatar
-                      alt="Michael Johnson"
-                      src="./Ceo1.jpg"
+                      alt="Sam Wilson"
+                      src="Ceo1.jpg"
                       style={{
                         margin: "0 auto",
                         width: "150px",
                         height: "150px",
-                      }} // Increased size of the avatar
+                      }}
                     />
                     <Typography
                       variant="h6"
@@ -403,7 +366,7 @@ function AboutUsPage() {
                         color: "#333",
                       }}
                     >
-                      Michael Johnson
+                      Sam Wilson
                     </Typography>
                     <Typography
                       style={{
@@ -413,7 +376,7 @@ function AboutUsPage() {
                         color: "#555",
                       }}
                     >
-                      Lead Technician
+                      Head of Marketing
                     </Typography>
                     <Typography
                       style={{
@@ -422,114 +385,46 @@ function AboutUsPage() {
                         color: "#777",
                       }}
                     >
-                      Michael brings years of experience and expertise to ensure
-                      every cleaning job is done to perfection.
+                      Sam oversees marketing strategies that propel our company to new heights.
                     </Typography>
                   </Paper>
                 </Box>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
 
-        <Grid item xs={12} sx={{ mt: 5 }}>
-          <Paper
-            elevation={2}
-            sx={{
-              padding: 3,
-              backgroundColor: "#f9f9f9",
-              borderRadius: "10px",
-            }}
-          >
-            <style>
-              {`
-            @keyframes scaleUp {
-              from {
-                opacity: 0;
-                transform: scale(0.9);
-              }
-              to {
-                opacity: 1;
-                transform: scale(1);
-              }
-            }
-            .scaleUp {
-              animation: scaleUp 1s ease-out;
-            }
-          `}
-            </style>
+          {/* Why Us Section */}
+          <Grid item xs={12}>
             <Typography
-              variant="h5"
+              variant="h4"
               component="h2"
-              gutterBottom
-              sx={{
-                fontFamily: "'Arial', sans-serif",
+              style={{
+                fontSize: "2rem",
                 fontWeight: "bold",
-                fontSize: "28px",
                 color: "#333",
                 textAlign: "center",
-                animation: "scaleUp 1s ease-out",
+                marginBottom: "16px",
               }}
-              className="scaleUp"
             >
-              Why Us?
+              Why Choose Us?
             </Typography>
-            <Typography
-              sx={{
-                fontFamily: "'Arial', sans-serif",
-                fontSize: "20px",
-                color: "#241212da",
-                marginBottom: "20px",
-                textAlign: "center",
-                animation: "scaleUp 1s ease-out",
-              }}
-              className="scaleUp"
-            >
-              Why would you choose SparkePro? We make the following promises to
-              you:
-            </Typography>
-            <ul
-              style={{
-                paddingLeft: "20px",
-                listStyleType: "disc",
-                margin: "16px 0",
-              }}
-            >
-              {whyUsText.map((item, index) => (
-                <li key={index}>
-                  <Typography
-                    sx={{
-                      fontFamily: "'Arial', sans-serif",
-                      fontSize: "18px",
-                      color: "#171616",
-                      animation: "scaleUp 1s ease-out",
-                    }}
-                    className="scaleUp"
-                  >
-                    {item}
-                  </Typography>
-                </li>
-              ))}
-            </ul>
-            <Typography
-              sx={{
-                fontFamily: "'Arial', sans-serif",
-                fontSize: "20px",
-                color: "#2ec1f7",
-                marginTop: "16px",
-                textAlign: "center",
-                animation: "scaleUp 1s ease-out",
-              }}
-              className="scaleUp"
-            >
-              Like what we offer? You can easily book SparklePro cleaning
-              services based on the size of your home, or your available time
-              and make bookings online! Of course, you can also feel free to
-              contact us. The information is present in the Contact tab. So go
-              book our service online now and say hello to a beautiful,
-              professionally cleaned home!
-            </Typography>
-          </Paper>
+
+            {whyUsText.map((text, index) => (
+              <Typography
+                key={index}
+                className="scaleUp"
+                style={{
+                  fontFamily: "'Arial', sans-serif",
+                  fontSize: "18px",
+                  color: "#555",
+                  textAlign: "center",
+                  marginBottom: "10px",
+                }}
+              >
+                {text}
+              </Typography>
+            ))}
+          </Grid>
         </Grid>
       </Paper>
     </Container>

@@ -26,7 +26,6 @@ function BookingPage() {
 
   const [serviceName, setServiceName] = useState("");
   const [serviceAmount, setServiceAmount] = useState("");
-
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [serviceType, setServiceType] = useState("one-time");
@@ -41,17 +40,16 @@ function BookingPage() {
   });
 
   useEffect(() => {
-    const bookingData = subData.filter(
-      (ele) => ele._id == cleanSubCategoriesID
-    );
-    setServiceName(bookingData[0].subServiceName);
-    setServiceAmount(bookingData[0].serviceAmount);
-  }, []);
+    const bookingData = subData.find((ele) => ele._id === cleanSubCategoriesID);
+    if (bookingData) {
+      setServiceName(bookingData.subServiceName);
+      setServiceAmount(bookingData.serviceAmount);
+    }
+  }, [subData, cleanSubCategoriesID]);
 
   const handleBookingSubmit = async (values) => {
     const bookingDate = `${date}T${time}`;
-    const stringDate = new Date(bookingDate).toString();
-    const startDate = Date.parse(stringDate);
+    const startDate = new Date(bookingDate).getTime();
     const address = `${values.houseNo}, ${values.streetName}, ${values.district}, ${values.landmark}`;
     const uniqueBookingID = Math.random().toString(36).slice(-8);
 
@@ -66,12 +64,12 @@ function BookingPage() {
     };
 
     if (startDate < Date.now()) {
-      toast.error("Cant book on past date", {
+      toast.error("Can't book on past date", {
         position: "top-right",
         duration: 5000,
       });
     } else if (startDate < Date.now() + 3600000) {
-      toast.error("Cant able to book services with-in 1hr", {
+      toast.error("Can't book services within 1hr", {
         position: "top-right",
         duration: 5000,
       });
@@ -81,7 +79,7 @@ function BookingPage() {
         const amount = parseInt(serviceAmount);
         await bookservice(bookData);
         await razorPayBooking(amount, uniqueBookingID);
-        toast.success("Booking Successfull", {
+        toast.success("Booking Successful", {
           position: "top-right",
           duration: 3000,
         });
@@ -259,30 +257,22 @@ function BookingPage() {
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <label className="Date_lab" htmlFor="Date">
-                Date
-              </label>
-              <div className="Date">
-                <input
-                  id="Date"
-                  type="date"
-                  required
-                  onChange={(e) => setDate(e.target.value)}
-                />
-              </div>
+              <TextField
+                fullWidth
+                label="Date"
+                type="date"
+                required
+                onChange={(e) => setDate(e.target.value)}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <label className="Time_lab" htmlFor="Time">
-                Time
-              </label>
-              <div className="Time">
-                <input
-                  id="Time"
-                  type="time"
-                  required
-                  onChange={(e) => setTime(e.target.value)}
-                />
-              </div>
+              <TextField
+                fullWidth
+                label="Time"
+                type="time"
+                required
+                onChange={(e) => setTime(e.target.value)}
+              />
             </Grid>
             <Grid item xs={12}>
               <Button
@@ -290,7 +280,8 @@ function BookingPage() {
                 variant="contained"
                 color="primary"
                 fullWidth
-              >{ !loading ? "Book Now" : <CircularProgress sx={{color:"white"}}/>}
+              >
+                {!loading ? "Book Now" : <CircularProgress sx={{ color: "white" }} />}
               </Button>
             </Grid>
           </Grid>
