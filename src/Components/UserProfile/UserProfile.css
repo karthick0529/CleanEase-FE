@@ -1,43 +1,40 @@
-.BootCard_UserDetails{
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-}
+/* UserProfile.css */
 
-.col{
-    display: flex;
-}
-
-.card-body .card-text{
-    font-size: 1rem;
-    text-align: center;
-    font-weight: 700;
-}
-
-.card-body .card-title{
-    display:flex;
-    justify-content: center;
-}
-
-.UserBootPara{
-    margin: 0;
-    padding: 20px;
-    font-size: 2rem;
-    font-weight: 800;
-    border-radius: 50%;
-    background-color: #f1f1f1;
-}
-
-.UserProfile_Heading {
-    background: linear-gradient(90deg, #0A5CA5, #063970);
-    width: 100%;
-    text-align: center;
-    color: whitesmoke;
-}
-
-.UserProfile_Heading > h2{
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
-    padding: 2rem 0;
-}
+/* Slide-in animation for the dashboard cards */
+@keyframes slideIn {
+    0% {
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Fade-in animation for the user profile card */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Apply the animations to containers */
+  .card-slide {
+    animation: slideIn 0.8s ease-out forwards;
+  }
+  
+  .fadeIn-card {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  /* For the overall container */
+  .slideIn-container {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  

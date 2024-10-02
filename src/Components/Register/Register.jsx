@@ -5,16 +5,14 @@ import http from "../../../utils/http";
 import { useNavigate } from "react-router-dom";
 import { registerSchema } from "../../Schema/Schema";
 import { useFormik } from "formik";
-import { toast } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css'; 
-import CircularProgress from '@mui/material/CircularProgress';
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Register() {
   const navigate = useNavigate();
   const { loginUser } = useGlobal();
   const [loading, setLoading] = useState(false);
-
 
   const formik = useFormik({
     initialValues: { firstname: "", lastname: "", email: "", password: "" },
@@ -26,54 +24,89 @@ function Register() {
 
   const handleRegisterSubmit = async (values) => {
     setLoading(true);
-    try {  
+    try {
       const res = await http.post("/auth/register", values);
-      if (res.status == 200) {
+      if (res.status === 200) {
         alert(`Account Verification link sent to your email - ${values.email}`);
         setLoading(false);
       }
     } catch (err) {
       setLoading(false);
       if (err.message === "Network Error") {
-        toast.error("Connection timeout! DB not responding", { position: "top-right", autoClose: 5000 });
-    } else if (err.response && err.response.status === 400) {
-        toast.error(err.response.data, { position: "top-right", autoClose: 5000 });
-    } else {
-        toast.error(`Error while login. Try again later: ${err.message}`, { position: "top-right", autoClose: 5000 });
+        toast.error("Connection timeout! DB not responding", {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      } else if (err.response && err.response.status === 400) {
+        toast.error(err.response.data, {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      } else {
+        toast.error(
+          `Error while registering. Try again later: ${err.message}`,
+          { position: "top-right", autoClose: 5000 }
+        );
+      }
     }
-}
   };
 
   useEffect(() => {
     if (loginUser) {
       navigate("/");
     }
-  }, []);
+  }, [loginUser, navigate]);
 
   const styleErrorMsg = {
     color: "red",
     fontWeight: "bold",
   };
 
+  // Updated styles for both image and form
+  const containerStyle = {
+    display: "flex",
+    justifyContent: "center", // Center horizontally
+    alignItems: "center", // Center vertically
+    height: "100vh", // Full viewport height
+    overflow: "hidden", // Hide overflow
+  };
+
+  const sharedSizeStyle = {
+    flex: 1,
+    height: "600px", // Set a consistent height for both
+    width: "600px", // Set a consistent width for both
+    maxWidth: "100%", // Ensure it scales down on smaller screens
+    borderRadius: "10px", // Optional: keep the border-radius for rounded corners
+  };
+
+  const imageStyle = {
+    ...sharedSizeStyle,
+    background: "url(./Register.jpg) no-repeat center center",
+    backgroundSize: "cover", // Ensure image covers the div fully
+  };
+
+  const formStyle = {
+    ...sharedSizeStyle,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#333",
+    color: "#fff",
+    padding: "2rem",
+    borderRadius: "10px",
+    boxShadow: "0px 0px 10px rgba(0,0,0,0.2)",
+    position: "relative",
+    zIndex: 1, // Ensure form stays on top of the image
+  };
+
   return (
-    <>
-      <div className="RegisterBack">
-        <Container
-          maxWidth="sm"
-          sx={{
-            marginTop: "3rem",
-            marginBottom: "3rem",
-            padding: "1rem",
-            borderRadius: "10px",
-            color: "#fff",
-            border: "2px solid rgba(255,255,255,0.2)",
-            boxShadow: "0px 0px 10px rgba(0,0,0,0.2)",
-            backdropFilter: "blur(18px)",
-          }}
-        >
+    <div style={containerStyle}>
+      <div style={imageStyle} />
+      <div style={formStyle}>
+        <Container maxWidth="sm" disableGutters>
           <Box
             sx={{
-              marginTop: 3,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -92,7 +125,7 @@ function Register() {
             >
               Sign Up with Valid Credentials
             </Typography>
-            <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1, width:"100%" }}>
+            <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -105,29 +138,21 @@ function Register() {
                 value={formik.values.firstname}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                //
-                InputLabelProps={{
-                  style: { color: "#fff" }, // Set label color to white
-                }}
-                InputProps={{
-                  style: { color: "#fff" }, // Set text field text color to white
-                }}
+                InputLabelProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff" } }}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "#fff", // Set border color to white
+                      borderColor: "#fff",
                     },
                     "&:hover fieldset": {
-                      borderColor: "#fff", // Set border color on hover to white
+                      borderColor: "#fff",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "#fff", // Set border color when focused to white
+                      borderColor: "#fff",
                     },
                   },
-                  width: '95%', // Make TextField wider
-                  maxWidth: '500px' // Limit the maximum width
                 }}
-                //
               />
               <Typography
                 variant="caption"
@@ -152,29 +177,21 @@ function Register() {
                 value={formik.values.lastname}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                //
-                InputLabelProps={{
-                  style: { color: "#fff" }, // Set label color to white
-                }}
-                InputProps={{
-                  style: { color: "#fff" }, // Set text field text color to white
-                }}
+                InputLabelProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff" } }}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "#fff", // Set border color to white
+                      borderColor: "#fff",
                     },
                     "&:hover fieldset": {
-                      borderColor: "#fff", // Set border color on hover to white
+                      borderColor: "#fff",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "#fff", // Set border color when focused to white
+                      borderColor: "#fff",
                     },
                   },
-                  width: '95%', // Make TextField wider
-                  maxWidth: '500px' // Limit the maximum width
                 }}
-                //
               />
               <Typography
                 variant="caption"
@@ -199,29 +216,21 @@ function Register() {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                //
-                InputLabelProps={{
-                  style: { color: "#fff" }, // Set label color to white
-                }}
-                InputProps={{
-                  style: { color: "#fff" }, // Set text field text color to white
-                }}
+                InputLabelProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff" } }}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "#fff", // Set border color to white
+                      borderColor: "#fff",
                     },
                     "&:hover fieldset": {
-                      borderColor: "#fff", // Set border color on hover to white
+                      borderColor: "#fff",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "#fff", // Set border color when focused to white
+                      borderColor: "#fff",
                     },
                   },
-                  width: '95%', // Make TextField wider
-                  maxWidth: '500px' // Limit the maximum width
                 }}
-                //
               />
               <Typography
                 variant="caption"
@@ -247,29 +256,21 @@ function Register() {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                //
-                InputLabelProps={{
-                  style: { color: "#fff" }, // Set label color to white
-                }}
-                InputProps={{
-                  style: { color: "#fff" }, // Set text field text color to white
-                }}
+                InputLabelProps={{ style: { color: "#fff" } }}
+                InputProps={{ style: { color: "#fff" } }}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "#fff", // Set border color to white
+                      borderColor: "#fff",
                     },
                     "&:hover fieldset": {
-                      borderColor: "#fff", // Set border color on hover to white
+                      borderColor: "#fff",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "#fff", // Set border color when focused to white
+                      borderColor: "#fff",
                     },
                   },
-                  width: '95%', // Make TextField wider
-                  maxWidth: '500px' // Limit the maximum width
                 }}
-                //
               />
               <Typography
                 variant="caption"
@@ -289,13 +290,13 @@ function Register() {
                 variant="contained"
                 sx={{ mt: 2, mb: 2, color: "#333", backgroundColor: "#fff" }}
               >
-              {!loading ? "Register" : <CircularProgress size={24}/>}           
+                {!loading ? "Register" : <CircularProgress size={24} />}
               </Button>
             </Box>
           </Box>
         </Container>
       </div>
-    </>
+    </div>
   );
 }
 

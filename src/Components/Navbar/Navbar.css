@@ -1,0 +1,114 @@
+/* AppBar */
+.MuiAppBar-root {
+    background-color: #333f4b !important; /* Darker shade of blue-gray */
+    padding: 0 25px; /* Slightly increased padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .MuiAppBar-root:hover {
+    background-color: #50647d; /* Lighter blue-gray on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+  }
+  
+  /* Toolbar */
+  .MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px; /* Increased padding for more spacing */
+  }
+  
+  .MuiToolbar-root:hover {
+    padding: 0 35px; /* Increase padding on hover */
+  }
+  
+  /* Typography */
+  .MuiTypography-root {
+    font-size: 1.75rem; /* Slightly larger font */
+    font-weight: 700; /* Heavier weight */
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+  }
+  
+  .MuiTypography-root:hover {
+    color: #68d1ff; /* Brighter color on hover */
+  }
+  
+  /* Tabs */
+  .MuiTabs-root {
+    flex-grow: 1;
+    justify-content: center;
+  }
+  
+  .MuiTab-root {
+    font-size: 1rem; /* Slightly larger font */
+    padding: 8px 16px; /* Add padding */
+    text-transform: none;
+    color: #cfd8dc; /* Light gray text */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .MuiTab-root:hover {
+    color: #68d1ff; /* Bright hover color */
+    transform: scale(1.15); /* Increased scaling effect */
+  }
+  
+  .MuiTab-root.Mui-selected {
+    color: #68d1ff !important;
+    font-weight: 600;
+  }
+  
+  /* Buttons */
+  .MuiButton-root {
+    margin-left: 15px;
+    border-radius: 30px; /* More rounded corners */
+    padding: 6px 16px;
+    background-color: #007bb2; /* Blue color for the button */
+    color: #ffffff;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .MuiButton-contained {
+    background-color: #007bb2;
+  }
+  
+  .MuiButton-root:hover {
+    background-color: #005c8a; /* Darker on hover */
+    transform: scale(1.1); /* Slightly larger button on hover */
+  }
+  
+  /* IconButton */
+  .MuiIconButton-root {
+    color: #cfd8dc !important; /* Light gray color */
+    padding: 8px;
+  }
+  
+  .MuiIconButton-root:hover {
+    color: #68d1ff; /* Brighter color on hover */
+    transform: scale(1.2); /* Larger icon on hover */
+  }
+  
+  /* Badge (Notification Dot) */
+  .MuiBadge-root .MuiBadge-dot {
+    background-color: #ff6f61; /* Red for notifications */
+    width: 10px;
+    height: 10px;
+  }
+  
+  .MuiBadge-root:hover .MuiBadge-dot {
+    background-color: #ff3d2e; /* Darker red on hover */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 960px) {
+    .MuiToolbar-root {
+      padding: 0 15px; /* Reduce padding on smaller screens */
+    }
+  
+    .MuiButton-root {
+      padding: 4px 12px; /* Smaller buttons on smaller screens */
+    }
+  }
+  

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   AppBar,
   Typography,
@@ -8,116 +8,168 @@ import {
   Button,
   useMediaQuery,
   useTheme,
+  IconButton,
+  Badge,
 } from "@mui/material";
-import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
+import {
+  Home as HomeIcon,
+  Info as InfoIcon,
+  PermContactCalendar as PermContactCalendarIcon,
+  AccountCircle as AccountCircleIcon,
+  CollectionsBookmark as CollectionsBookmarkIcon,
+  Checklist as ChecklistIcon,
+  Notifications as NotificationsIcon,
+} from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import DrawerCompo from "./DrawerCompo";
-import {useNavigate} from 'react-router-dom';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from '@mui/icons-material/Info';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
-import { useGlobal } from '../../GlobalContext/GlobalProvider';
-import ChecklistIcon from '@mui/icons-material/Checklist';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
+import { useGlobal } from "../../GlobalContext/GlobalProvider";
+import "./Navbar.css";
 
+function Navbar({ value, setValue }) {
+  const { loginUser, globalUserNotifications } = useGlobal();
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-function Navbar({value,setValue}) {
-    const { loginUser, globalUserNotifications } = useGlobal();
-    const navigate = useNavigate();
-    const theme = useTheme();
-    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  // Navigation paths for different roles
+  const userNavigatePath = [
+    { icon: <HomeIcon />, name: "Home", path: "/" },
+    { icon: <InfoIcon />, name: "About", path: "/about" },
+    { icon: <PermContactCalendarIcon />, name: "Contact", path: "/contact" },
+    { icon: <AccountCircleIcon />, name: "User", path: "/user-profile" },
+    {
+      icon: <CollectionsBookmarkIcon />,
+      name: "Bookings",
+      path: "/user-bookings",
+    },
+    { icon: <ChecklistIcon />, name: "Checklist", path: "/user-checklist" },
+  ];
 
+  const noUserNavigatePath = [
+    { icon: <HomeIcon />, name: "Home", path: "/" },
+    { icon: <InfoIcon />, name: "About", path: "/about" },
+    { icon: <PermContactCalendarIcon />, name: "Contact", path: "/contact" },
+  ];
 
-    const userNavigatePath = [
-        {icon:<HomeIcon/>,name:"Home",path:"/"},
-        {icon:<InfoIcon/>,name:"About",path:"/about"},
-        {icon:<PermContactCalendarIcon/>,name:"Contact",path:"/contact"},
-        {icon:<AccountCircleIcon/>,name:"User",path:"/user-profile"},
-        {icon:<CollectionsBookmarkIcon/>,name:"Bookings",path:"/user-bookings"},
-        {icon:<ChecklistIcon/>,name:"CheckList",path:"/user-cehcklist"}
-    ]
-    
-    const noUserNavigatePath = [
-        {icon:<HomeIcon/>,name:"Home",path:"/"},
-        {icon:<InfoIcon/>,name:"About",path:"/about"},
-        {icon:<PermContactCalendarIcon/>,name:"Contact",path:"/contact"},
-    ]
+  const adminNavigatePath = [
+    { icon: <HomeIcon />, name: "Home", path: "/" },
+    {
+      icon: <CollectionsBookmarkIcon />,
+      name: "Manage Bookings",
+      path: "/admin-managebooking",
+    },
+    { icon: <InfoIcon />, name: "About", path: "/about" },
+    { icon: <PermContactCalendarIcon />, name: "Contact", path: "/contact" },
+  ];
 
-    const AdminNavigatePath = [
-      {icon:<HomeIcon/>,name:"Home",path:"/"},
-      {icon:<CollectionsBookmarkIcon/>,name:"Manage Bookings", path:"/admin-managebooking"},
-      {icon:<InfoIcon/>,name:"About",path:"/about"},
-      {icon:<PermContactCalendarIcon/>,name:"Contact",path:"/contact"},
-    ]
-    
-    return (
-        <>
-            <AppBar position="static" sx={{ background: "#063970" }}>
-        <Toolbar>
-          <Typography sx={{display:"flex"}}>
-            CleanEase <CleaningServicesIcon size='large' sx={{paddingLeft:"3px",paddingBottom:"5px"}}/>
-          </Typography>
+  const getNavItems = () => {
+    if (!loginUser) return noUserNavigatePath;
+    return loginUser.role === "User" ? userNavigatePath : adminNavigatePath;
+  };
 
-          {isMatch ? (
-            <>
-              <DrawerCompo data = {!loginUser ? noUserNavigatePath : loginUser.role == "User" ? userNavigatePath : AdminNavigatePath }/>
-            </>
-          ) : (
-            <>
-              <Tabs
-                sx={{ marginLeft: "5px" }}
-                textColor="inherit"
-                value={value}
-                onChange={(e, value) => {
-                  setValue(value);
-                  navigate(`${value}`)
-                }}
-                indicatorColor="secondary"
+  const handleLogout = () => {
+    setValue("/");
+    navigate(loginUser.role === "User" ? "/logout" : "/admin-logout");
+  };
+
+  return (
+    <AppBar position="static" className="MuiAppBar-root">
+      <Toolbar className="MuiToolbar-root">
+        <Typography style={{ fontSize: "2em", fontFamily: "Times New Roman" }}>
+          SparklePro{" "}
+          <span
+            role="img"
+            aria-label="sparkles"
+            style={{ paddingLeft: "3px", color: "#f4d03f", fontSize: "1.1em" }}
+          >
+            ✨
+          </span>
+        </Typography>
+
+        {isMatch ? (
+          <DrawerCompo data={getNavItems()} />
+        ) : (
+          <>
+            <Tabs
+              className="MuiTabs-root"
+              textColor="inherit"
+              value={value}
+              onChange={(e, value) => {
+                setValue(value);
+                navigate(`${value}`);
+              }}
+              indicatorColor="secondary"
+            >
+              {getNavItems().map((ele) => (
+                <Tab
+                  className="MuiTab-root"
+                  key={ele.name}
+                  value={ele.path}
+                  icon={ele.icon}
+                  label={ele.name}
+                />
+              ))}
+            </Tabs>
+
+            {!loginUser ? (
+              <>
+                <Button
+                  className="MuiButton-root MuiButton-contained"
+                  onClick={() => {
+                    setValue("");
+                    navigate("/login");
+                  }}
+                >
+                  LogIn
+                </Button>
+                <Button
+                  className="MuiButton-root MuiButton-contained"
+                  onClick={() => {
+                    setValue("");
+                    navigate("/register");
+                  }}
+                >
+                  SignUp
+                </Button>
+              </>
+            ) : loginUser.role === "User" ? (
+              <>
+                <IconButton
+                  className="MuiIconButton-root"
+                  onClick={() => {
+                    setValue("");
+                    navigate("/user-notifications");
+                  }}
+                  aria-label="notification"
+                  size="large"
+                >
+                  <Badge
+                    badgeContent={globalUserNotifications.length}
+                    color="secondary"
+                  >
+                    <NotificationsIcon fontSize="inherit" />
+                  </Badge>
+                </IconButton>
+                <Button
+                  className="MuiButton-root MuiButton-contained"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button
+                className="MuiButton-root MuiButton-contained"
+                onClick={handleLogout}
               >
-
-                {!loginUser ?  noUserNavigatePath.map((ele)=>(
-                    <Tab sx={{fontSize:"12px"}} key={ele.name} value={`${ele.path}`} icon={ele.icon} label={ele.name}/>
-                )) : loginUser.role == "User" ? userNavigatePath.map((ele)=>( 
-                        <Tab sx={{fontSize:"12px"}} key={ele.name} value={`${ele.path}`} icon={ele.icon} label={ele.name} />
-                )) : AdminNavigatePath.map((ele)=>( 
-                  <Tab sx={{fontSize:"12px"}} key={ele.name} value={`${ele.path}`} icon={ele.icon} label={ele.name} />
-                ))
-              }
-
-             </Tabs>
-             {!loginUser ? <>
-             <Button sx={{ marginLeft: "auto" }} onClick={()=>{setValue('');navigate('/login')}} variant="contained">
-                LogIn
-              </Button>
-              <Button sx={{ marginLeft: "10px" }} onClick={()=>{setValue('');navigate('/register')}} variant="contained">
-                SignUp
-              </Button>
-             </> : loginUser.role == "User" ?
-             <>
-              <IconButton sx={{ marginLeft: "auto", color:"inherit" }} onClick={()=>{setValue('');navigate('/user-notifications')}} aria-label="notification" size="large">
-                <Badge badgeContent={globalUserNotifications.length} color="secondary">
-                  <NotificationsIcon fontSize="inherit" />
-                </Badge>   
-              </IconButton>
-              <Button sx={{ marginLeft: "10px" }} onClick={()=>{setValue('/');navigate('/logout')}} variant="contained">
                 Logout
               </Button>
-             </> : 
-             <>
-              <Button sx={{ marginLeft: "auto" }} onClick={()=>{setValue('/');navigate('/admin-logout')}} variant="contained">
-                Logout
-              </Button>
-             </>
-             }
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-      </>
-    )
+            )}
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
+  );
 }
 
-export default Navbar
+export default Navbar;

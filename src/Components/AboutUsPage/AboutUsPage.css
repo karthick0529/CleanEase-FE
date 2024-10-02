@@ -1,0 +1,133 @@
+/* Container for the entire slideshow */
+.slideshow-container {
+    width: 100%; /* Full width of the container */
+    height: 400px; /* Set height for the images */
+    overflow: hidden; /* Hide overflow */
+    display: flex;
+    justify-content: center;
+    position: relative; /* Required for absolute positioning of the slideshow */
+  }
+  
+  /* The slideshow itself */
+  .slideshow {
+    display: flex;
+    width: 300%; /* Width is 3 times the container (3 images) */
+    animation: slide 30s infinite; /* Slow down the animation to 30 seconds */
+    transition: transform 1s ease-in-out; /* Smooth transition */
+  }
+  
+  .slideshow-image {
+    width: 100%; /* Each image takes the full width of the container */
+    height: 400px; /* Same height as container */
+    object-fit: cover; /* Ensure the image covers the entire area */
+    flex-shrink: 0; /* Prevent shrinking of images */
+  }
+  
+  /* Manual scroll */
+  .slideshow-container:hover .slideshow {
+    animation-play-state: paused; /* Pause the slideshow when hovering to allow manual scroll */
+  }
+  
+  /* Animation for auto-sliding effect */
+  @keyframes slide {
+    0% {
+      transform: translateX(0); /* Show the first image */
+    }
+    20% {
+      transform: translateX(0); /* Pause on the first image */
+    }
+    33.33% {
+      transform: translateX(-100%); /* Slide to the second image */
+    }
+    53% {
+      transform: translateX(-100%); /* Pause on the second image */
+    }
+    66.66% {
+      transform: translateX(-200%); /* Slide to the third image */
+    }
+    86% {
+      transform: translateX(-200%); /* Pause on the third image */
+    }
+    100% {
+      transform: translateX(0); /* Reset to the first image */
+    }
+  }
+  
+  /* Mission and Vision Paper Styles */
+  .mission-paper,
+  .vision-paper {
+    padding: 24px;
+    background-color: #f5f5f5; /* Light background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .mission-paper {
+    background-color: #e0f7fa; /* Light teal for mission */
+  }
+  
+  .vision-paper {
+    background-color: #fff3e0; /* Light orange for vision */
+  }
+  
+  /* Typography for Section Titles */
+  .section-title {
+    font-size: 1.75rem; /* Adjust font size as needed */
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 16px; /* Space below title */
+    font-family: "Arial", sans-serif; /* Font family for section titles */
+  }
+  
+  /* Typography for Section Content */
+  .section-content {
+    font-size: 1rem; /* Font size for content */
+    color: #666;
+    line-height: 1.6; /* Line height for readability */
+    text-align: center; /* Center-align the text */
+  }
+  
+  /* Team Section Styles */
+  .team-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px; /* Space below title */
+    color: #333;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .team-member-paper {
+    padding: 20px;
+    background-color: #ffffff; /* White background for team members */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    text-align: center; /* Center-align the text */
+  }
+  
+  .team-member-avatar {
+    width: 150px; /* Size of the avatar */
+    height: 150px; /* Size of the avatar */
+    border-radius: 50%; /* Circular avatar */
+    margin-bottom: 16px; /* Space below avatar */
+  }
+  
+  .team-member-name {
+    font-size: 1.25rem; /* Font size for name */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px; /* Space below name */
+  }
+  
+  .team-member-role {
+    font-size: 1rem; /* Font size for role */
+    color: #777;
+    margin-bottom: 8px; /* Space below role */
+  }
+  
+  .team-member-bio {
+    font-size: 0.875rem; /* Font size for bio */
+    color: #555;
+  }
+  

@@ -8,7 +8,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 
-# 🧹 CleanEase Site Frontend
+# 🧹 SparklePro Site Frontend
 
 ## 🚀 Overview
 This repository contains the frontend of a functional cleaning service booking platform. The application is designed with a focus on providing a smooth and intuitive user experience. Built with React.js, it features a responsive design, interactive components, and an elegant UI.

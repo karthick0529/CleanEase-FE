@@ -3,6 +3,7 @@ import { Grid, Typography, Box, Link, Container } from "@mui/material";
 import XIcon from "@mui/icons-material/X";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import GitHubIcon from "@mui/icons-material/GitHub"; // Import GitHub Icon
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
@@ -11,334 +12,232 @@ function Footer({ setValue }) {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Box
-        sx={{
-          backgroundColor: "rgba(0, 0, 0, 0.8);",
-          width:"100%",
-          fontWeight: "700",
-          color: "white",
-          padding: "2rem 0",
-          marginTop: "auto",
-        }}
-      >
-        <Container maxWidth="lg">
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Typography textAlign="center" variant="h6" gutterBottom>
-                CleanEase Booking
-              </Typography>
+    <Box
+      sx={{
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        width: "100%",
+        fontWeight: "800",
+        color: "white",
+        padding: "2rem 0",
+        marginTop: "auto",
+        fontFamily: "'Arial', sans-serif",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid container spacing={3}>
+          {/* About Us section */}
+          <Grid item xs={12} sm={6} md={4}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Typography
-                sx={{
-                  display: "flex",
-                  textAlign: "justify",
-                  justifyContent: "center",
-                }}
-                variant="body2"
+                textAlign="center"
+                variant="h6"
+                gutterBottom
+                sx={{ fontSize: "1.75rem", fontFamily: "'Arial', sans-serif" }}
               >
-                Manage everything from our Web-Application Keep track of
-                scheduling and services from anywhere.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Typography textAlign="center" variant="h6" gutterBottom>
                 About Us
               </Typography>
-              <Typography textAlign="justify" variant="body2">
+              <Typography
+                textAlign="justify"
+                variant="body2"
+                sx={{ fontSize: "1.2rem", fontFamily: "'Arial', sans-serif" }}
+              >
                 We provide top-notch cleaning services with a focus on quality
                 and customer satisfaction. Our professional team ensures your
                 space is spotless and welcoming.
               </Typography>
-              <Typography sx={{ margin: "0.8rem 0" }} variant="body2">
+              <Typography
+                sx={{
+                  margin: "0.8rem 0",
+                  fontSize: "1.2rem",
+                  fontFamily: "'Arial', sans-serif",
+                }}
+                variant="body2"
+              >
                 <b>Phone:</b> +91 123 456 7890
               </Typography>
-              <Typography sx={{ margin: "0.8rem 0" }} variant="body2">
-                <b>Email:</b> support@cleanease.com
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Typography variant="h6" textAlign="center" gutterBottom>
-                Book Services
-              </Typography>
               <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
+                sx={{
+                  margin: "0.5rem 0",
+                  fontSize: "1.2rem",
+                  fontFamily: "'Arial', sans-serif",
+                }}
                 variant="body2"
               >
-                <Link
-                  onClick={() => {
-                    setValue("");
-                    navigate("/66b312c43b4fc6d8eda38842");
-                  }}
-                  color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
-                >
-                  Residential Cleaning
-                </Link>
+                <b>Email:</b> support@sparkelpro.com
               </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{
+                  marginTop: "1rem",
+                }}
               >
-                <Link
-                  onClick={() => {
-                    setValue("");
-                    navigate("/66b312c43b4fc6d8eda38843");
-                  }}
+                <IconButton
+                  onClick={() =>
+                    window.open("https://www.facebook.com/", "_blank")
+                  }
                   color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
+                  aria-label="Facebook"
                 >
-                  Commercial Cleaning
-                </Link>
-              </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
-              >
-                <Link
-                  onClick={() => {
-                    setValue("");
-                    navigate("/66b312c43b4fc6d8eda38844");
-                  }}
+                  <FacebookIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => window.open("https://x.com/", "_blank")}
                   color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
+                  aria-label="Twitter"
                 >
-                  Specialized Cleaning
-                </Link>
-              </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
-              >
-                <Link
-                  onClick={() => {
-                    setValue("");
-                    navigate("/66b312c43b4fc6d8eda38845");
-                  }}
+                  <XIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() =>
+                    window.open("https://www.instagram.com", "_blank")
+                  }
                   color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
+                  aria-label="Instagram"
                 >
-                  Event Cleaning
-                </Link>
-              </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
-              >
-                <Link
-                  onClick={() => {
-                    setValue("");
-                    navigate("/66b312c43b4fc6d8eda38846");
-                  }}
+                  <InstagramIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() =>
+                    window.open("https://github.com/your-repo", "_blank")
+                  }
                   color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
+                  aria-label="GitHub"
                 >
-                  Green Cleaning
-                </Link>
-              </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
-              >
-                <Link
-                  onClick={() => {
-                    setValue("");
-                    navigate("/66b312c43b4fc6d8eda38847");
-                  }}
-                  color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
-                >
-                  Disinfection Sevices
-                </Link>
-              </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
-              >
-                <Link
-                  onClick={() => {
-                    setValue("");
-                    navigate("/66b312c43b4fc6d8eda38848");
-                  }}
-                  color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
-                >
-                  Janitorial Services
-                </Link>
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <Typography variant="h6" textAlign="center" gutterBottom>
-                Quick Links
-              </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
-              >
-                <Link
-                  onClick={() => {
-                    setValue("/");
-                    navigate("/");
-                  }}
-                  color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
-                >
-                  Home
-                </Link>
-              </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
-              >
-                <Link
-                  onClick={() => {
-                    setValue("/about");
-                    navigate("/about");
-                  }}
-                  color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
-                >
-                  About Us
-                </Link>
-              </Typography>
-              <Typography
-                sx={{ margin: "0.5rem 0" }}
-                textAlign="center"
-                variant="body2"
-              >
-                <Link
-                  onClick={() => {
-                    setValue("/contact");
-                    navigate("/contact");
-                  }}
-                  color="inherit"
-                  underline="hover"
-                  sx={{
-                    "&:hover": {
-                      color: "#3CB371", // Use the green color for hover
-                    },
-                    cursor: "pointer",
-                  }}
-                >
-                  Contact
-                </Link>
-              </Typography>
-            </Grid>
+                  <GitHubIcon />
+                </IconButton>
+              </Stack>
+            </Box>
           </Grid>
-          <Box
-            mt={4}
-            textAlign="center"
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-            }}
-          >
-            <Typography variant="body2" color="inherit">
-              © {new Date().getFullYear()} Cleaning Service. All rights
-              reserved.
-            </Typography>
-            <Stack
-              direction="row"
-              sx={{
-                width: "100%",
-                justifyContent: "center",
-                paddingTop: "1rem",
-              }}
-              spacing={1}
+
+          {/* Book Services section */}
+          <Grid item xs={12} sm={6} md={4}>
+            <Typography
+              variant="h6"
+              textAlign="center"
+              gutterBottom
+              sx={{ fontSize: "1.75rem", fontFamily: "'Arial', sans-serif" }}
             >
-              <IconButton
-                onClick={() =>
-                  window.open("https://www.facebook.com/", "_blank")
-                }
-                color="inherit"
-                aria-label="Facebook"
+              Book Services
+            </Typography>
+            {[
+              "Residential Cleaning",
+              "Commercial Cleaning",
+              "Specialized Cleaning",
+              "Event Cleaning",
+              "Green Cleaning",
+              "Disinfection Services",
+              "Janitorial Services",
+            ].map((service, idx) => (
+              <Typography
+                key={idx}
+                sx={{
+                  margin: "0.5rem 0",
+                  fontSize: "1.5rem",
+                  fontFamily: "'Arial', sans-serif",
+                }}
+                textAlign="center"
+                variant="body2"
               >
-                <FacebookIcon />
-              </IconButton>
-              <IconButton
-                onClick={() => window.open("https://x.com/", "_blank")}
-                color="inherit"
-                aria-label="Twitter"
+                <Link
+                  onClick={() => {
+                    setValue("");
+                    navigate(`/66b312c43b4fc6d8eda3884${46 + idx}`);
+                  }}
+                  color="inherit"
+                  underline="hover"
+                  sx={{
+                    "&:hover": {
+                      color: "#3CB371",
+                    },
+                    cursor: "pointer",
+                    fontFamily: "'Arial', sans-serif",
+                    fontSize: "1.4rem",
+                  }}
+                >
+                  {service}
+                </Link>
+              </Typography>
+            ))}
+          </Grid>
+
+          {/* Quick Links section */}
+          <Grid item xs={12} sm={6} md={4}>
+            <Typography
+              variant="h6"
+              textAlign="center"
+              gutterBottom
+              sx={{ fontSize: "1.75rem", fontFamily: "'Arial', sans-serif" }}
+            >
+              Quick Links
+            </Typography>
+            {["Home", "About Us", "Contact"].map((link, idx) => (
+              <Typography
+                key={idx}
+                sx={{
+                  margin: "0.5rem 0",
+                  fontSize: "2rem",
+                  fontFamily: "'Arial', sans-serif",
+                }}
+                textAlign="center"
+                variant="body2"
               >
-                <XIcon />
-              </IconButton>
-              <IconButton
-                onClick={() =>
-                  window.open("https://www.instagram.com", "_blank")
-                }
-                color="inherit"
-                aria-label="Instagram"
-              >
-                <InstagramIcon />
-              </IconButton>
-            </Stack>
-          </Box>
-        </Container>
-      </Box>
-    </>
+                <Link
+                  onClick={() => {
+                    setValue(
+                      link === "Home"
+                        ? "/"
+                        : `/${link.toLowerCase().replace(" ", "")}`
+                    );
+                    navigate(
+                      link === "Home"
+                        ? "/"
+                        : `/${link.toLowerCase().replace(" ", "")}`
+                    );
+                  }}
+                  color="inherit"
+                  underline="hover"
+                  sx={{
+                    "&:hover": {
+                      color: "#3CB371",
+                    },
+                    cursor: "pointer",
+                    fontFamily: "'Arial', sans-serif",
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  {link}
+                </Link>
+              </Typography>
+            ))}
+          </Grid>
+        </Grid>
+        <Box
+          mt={4}
+          textAlign="center"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            fontFamily: "'Arial', sans-serif",
+          }}
+        >
+          <Typography
+            variant="body2"
+            color="inherit"
+            sx={{ fontSize: "1.5rem" }}
+          >
+            © {new Date().getFullYear()} Cleaning Service. All rights reserved.
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
   );
 }
 

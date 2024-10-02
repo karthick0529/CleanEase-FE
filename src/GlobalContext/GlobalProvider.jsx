@@ -88,7 +88,7 @@ function GlobalProvider({ children }) {
       key: "rzp_test_3WUTrpolUhcOdV", // Replace with your test key ID
       amount: order.amount,
       currency: order.currency,
-      name: "CleanEase@Corporation",
+      name: "SparklePro@Corporation",
       description: "Test Transaction",
       order_id: order.id,
       handler: async function (response) {

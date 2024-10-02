@@ -9,23 +9,21 @@ import {
   TableRow,
   Paper,
   IconButton,
+  FormControl,
+  InputLabel,
+  NativeSelect,
+  Button,
+  Box,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import "./UserBooking.css";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import NativeSelect from "@mui/material/NativeSelect";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import { useNavigate } from "react-router-dom";
-import Button from '@mui/material/Button';
-
 
 function UserBooking() {
   const navigate = useNavigate();
-
-  const { getUserBookings, razorPayBooking, bookingData, deleteBooking } = useGlobal();
+  const { getUserBookings, razorPayBooking, bookingData, deleteBooking } =
+    useGlobal();
 
   const [sortByServiceType, setSortByServiceType] = useState("All");
   const [filterByStatus, setFilterByStatus] = useState("All");
@@ -45,158 +43,157 @@ function UserBooking() {
 
   useEffect(() => {
     if (bookingData.length > 0) {
-      if (sortByServiceType == "All" && filterByStatus == "All") {
-        setMainData(bookingData);
-      }
-      if (sortByServiceType == "one-time" && filterByStatus == "All") {
-        const newData = bookingData.filter(
-          (ele) => ele.serviceType == "one-time"
+      let filteredData = bookingData;
+
+      if (sortByServiceType !== "All") {
+        filteredData = filteredData.filter(
+          (ele) => ele.serviceType === sortByServiceType
         );
-        setMainData(newData);
       }
-      if (sortByServiceType == "recurring" && filterByStatus == "All") {
-        const newData = bookingData.filter(
-          (ele) => ele.serviceType == "recurring"
+
+      if (filterByStatus !== "All") {
+        filteredData = filteredData.filter(
+          (ele) => ele.status === filterByStatus
         );
-        setMainData(newData);
       }
-      if (sortByServiceType == "All" && filterByStatus == "Completed") {
-        const newData = bookingData.filter((ele) => ele.status == "Completed");
-        setMainData(newData);
-      }
-      if (sortByServiceType == "All" && filterByStatus == "Ongoing") {
-        const newData = bookingData.filter((ele) => ele.status == "Ongoing");
-        setMainData(newData);
-      }
-      if (sortByServiceType == "All" && filterByStatus == "Not Completed") {
-        const newData = bookingData.filter(
-          (ele) => ele.status == "Not Completed"
-        );
-        setMainData(newData);
-      }
-      if (sortByServiceType == "one-time" && filterByStatus == "Completed") {
-        const newData = bookingData.filter(
-          (ele) => ele.status == "Completed" && ele.serviceType == "one-time"
-        );
-        setMainData(newData);
-      }
-      if (sortByServiceType == "one-time" && filterByStatus == "Ongoing") {
-        const newData = bookingData.filter(
-          (ele) => ele.status == "Ongoing" && ele.serviceType == "one-time"
-        );
-        setMainData(newData);
-      }
-      if (
-        sortByServiceType == "one-time" &&
-        filterByStatus == "Not Completed"
-      ) {
-        const newData = bookingData.filter(
-          (ele) =>
-            ele.status == "Not Completed" && ele.serviceType == "one-time"
-        );
-        setMainData(newData);
-      }
-      if (sortByServiceType == "recurring" && filterByStatus == "Completed") {
-        const newData = bookingData.filter(
-          (ele) => ele.status == "Completed" && ele.serviceType == "recurring"
-        );
-        setMainData(newData);
-      }
-      if (
-        sortByServiceType == "recurring" &&
-        filterByStatus == "Not Completed"
-      ) {
-        const newData = bookingData.filter(
-          (ele) =>
-            ele.status == "Not Completed" && ele.serviceType == "recurring"
-        );
-        setMainData(newData);
-      }
-      if (sortByServiceType == "recurring" && filterByStatus == "Ongoing") {
-        const newData = bookingData.filter(
-          (ele) => ele.status == "Ongoing" && ele.serviceType == "recurring"
-        );
-        setMainData(newData);
-      }
+
+      setMainData(filteredData);
     }
   }, [bookingData, sortByServiceType, filterByStatus]);
 
   const UpdateRazorPayBooking = async (amount, uniqueBookingID) => {
-    try{
+    try {
       await razorPayBooking(amount, uniqueBookingID);
       getUserBookings();
-    } catch (err){
+    } catch (err) {
       if (err.message === "Network Error") {
-        toast.error("Connection timeout! DB not responding", { position: "top-right", autoClose: 5000 });
-    } else if (err.response && err.response.status === 400) {
-        toast.error(err.response.data, { position: "top-right", autoClose: 5000 });
-    } else {
-        toast.error(`Error while Payment. Try again later: ${err.message}`, { position: "top-right", autoClose: 5000 });
+        toast.error("Connection timeout! DB not responding", {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      } else if (err.response && err.response.status === 400) {
+        toast.error(err.response.data, {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      } else {
+        toast.error(`Error while Payment. Try again later: ${err.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      }
     }
-    }
-  }
+  };
 
   return (
     <>
-    <div className="UserBooking_Heading">
+      <div
+        className="UserBooking_Heading"
+        style={{
+          animation: "fadeIn 1s ease-in-out",
+          fontSize: "24px",
+          marginBottom: "1rem",
+        }}
+      >
         <h2>User Booking Data</h2>
-    </div>
-      <div className="Table_Top">
-        <Box sx={{ minWidth: 120, padding: "0 5px" }}>
-          <FormControl fullWidth>
-            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-              Filter by service type
-            </InputLabel>
-            <NativeSelect
-              defaultValue="All"
-              onChange={handleSelect}
-              inputProps={{
-                name: "filter",
-                id: "selectTag",
-              }}
-            >
-              <option value="All">All</option>
-              <option value="one-time">One-Time</option>
-              <option value="recurring">Recurring</option>
-            </NativeSelect>
-          </FormControl>
-        </Box>
-        <Box sx={{ minWidth: 120, padding: "0 5px" }}>
-          <FormControl fullWidth>
-            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-              Filter by Status
-            </InputLabel>
-            <NativeSelect
-              defaultValue="All"
-              onChange={handleSelectStatus}
-              inputProps={{
-                name: "filterStatus",
-                id: "selectTag",
-              }}
-            >
-              <option value="All">All</option>
-              <option value="Completed">Completed</option>
-              <option value="Ongoing">Ongoing</option>
-              <option value="Not Completed">Not Completed</option>
-            </NativeSelect>
-          </FormControl>
-        </Box>
       </div>
-      <TableContainer sx={{marginBottom:"1rem"}} component={Paper}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: "1rem",
+        }}
+      >
+        <div style={{ flex: 1, padding: "0 10px" }}>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                Filter by service type
+              </InputLabel>
+              <NativeSelect
+                defaultValue="All"
+                onChange={handleSelect}
+                inputProps={{
+                  name: "filter",
+                  id: "selectTag",
+                }}
+              >
+                <option value="All">All</option>
+                <option value="one-time">One-Time</option>
+                <option value="recurring">Recurring</option>
+              </NativeSelect>
+            </FormControl>
+          </Box>
+        </div>
+        <div style={{ flex: 1, padding: "0 10px" }}>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                Filter by Status
+              </InputLabel>
+              <NativeSelect
+                defaultValue="All"
+                onChange={handleSelectStatus}
+                inputProps={{
+                  name: "filterStatus",
+                  id: "selectTag",
+                }}
+              >
+                <option value="All">All</option>
+                <option value="Completed">Completed</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Not Completed">Not Completed</option>
+              </NativeSelect>
+            </FormControl>
+          </Box>
+        </div>
+      </div>
+      <TableContainer
+        sx={{
+          marginBottom: "1rem",
+          backgroundColor: "#87CEEB", // Sky blue color for the container
+        }}
+        component={Paper}
+      >
         <Table sx={{ minWidth: 650 }} aria-label="responsive table">
-          <TableHead sx={{ backgroundColor: "lightgray" }}>
+          <TableHead
+            sx={{
+              backgroundColor: "#B0E0E6", // Lighter sky blue color for the header
+            }}
+          >
             <TableRow>
-              <TableCell>Service Name</TableCell>
-              <TableCell align="center">Service Date</TableCell>
-              <TableCell align="center">Service Time</TableCell>
-              <TableCell align="center">Service Type</TableCell>
-              <TableCell align="center">Address</TableCell>
-              <TableCell align="center">Amount</TableCell>
-              <TableCell align="center">Is Paid</TableCell>
-              <TableCell align="center">Is Confirmed</TableCell>
-              <TableCell align="center">Status</TableCell>
-              <TableCell align="center">Pay Now</TableCell>
-              <TableCell align="center">Actions</TableCell>
+              <TableCell style={{ fontSize: "16px" }}>Service Name</TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Service Date
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Service Time
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Service Type
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Address
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Amount
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Is Paid
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Is Confirmed
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Status
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Pay Now
+              </TableCell>
+              <TableCell align="center" style={{ fontSize: "16px" }}>
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           {bookingData.length > 0 ? (
@@ -221,51 +218,79 @@ function UserBooking() {
                   <TableCell align="center">
                     {row.isAmountPaid ? "Yes" : "No"}
                   </TableCell>
-                  <TableCell align="center">{row.isConfirmed ? "Yes" : "No" }</TableCell>
-                  <TableCell align="center">{row.status}</TableCell>
-                  <TableCell align="center"><Button variant="contained" disabled={row.isAmountPaid ? true : false} onClick={()=>UpdateRazorPayBooking(row.amount,row.uniqueBookingID)} >Pay Now!</Button></TableCell>
                   <TableCell align="center">
-                    <IconButton
-                      color="primary"
-                      disabled={row.status == "Ongoing" || row.status == "Completed" ? true : false}
-                      onClick={() => navigate(`/user-booking/edit/${row._id}`)}
-                    >
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton
-                      color="secondary"
-                      disabled={row.status == "Ongoing" ? true : false}
-                      onClick={() => deleteBooking(row._id)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                    <IconButton
-                      onClick={()=>navigate(`/user-create-review/${row.serviceID}`)}
-                      color="secondary"
-                      disabled={
-                        row.status == "Ongoing" || row.status == "Not Completed"
-                          ? true
-                          : false
+                    {row.isConfirmed ? "Yes" : "No"}
+                  </TableCell>
+                  <TableCell align="center">{row.status}</TableCell>
+                  <TableCell align="center">
+                    <Button
+                      variant="contained"
+                      color={row.isAmountPaid ? "success" : "error"}
+                      onClick={() =>
+                        UpdateRazorPayBooking(row.amount, row.uniqueBookingID)
                       }
+                      style={{
+                        animation: !row.isAmountPaid
+                          ? "pulse 1.5s infinite"
+                          : "none",
+                      }}
                     >
-                      <ReviewsIcon />
-                    </IconButton>
+                      {row.isAmountPaid ? "Paid" : "Pay Now!"}
+                    </Button>
+                  </TableCell>
+                  <TableCell align="center">
+                    <div className="icon-button-container">
+                      <IconButton
+                        className="icon-button"
+                        style={{ color: "black" }} // Default black color
+                        disabled={
+                          row.status === "Ongoing" || row.status === "Completed"
+                        }
+                        onClick={() =>
+                          navigate(`/user-booking/edit/${row._id}`)
+                        }
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        className="icon-button"
+                        style={{ color: "black" }} // Default black color
+                        disabled={row.status === "Ongoing"}
+                        onClick={() => deleteBooking(row._id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                      <IconButton
+                        className="icon-button"
+                        style={{ color: "black" }} // Default black color
+                        onClick={() =>
+                          navigate(`/user-create-review/${row.serviceID}`)
+                        }
+                        disabled={
+                          row.status === "Ongoing" ||
+                          row.status === "Not Completed"
+                        }
+                      >
+                        <ReviewsIcon />
+                      </IconButton>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           ) : (
-            ""
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: "2rem",
+                fontSize: "20px",
+              }}
+            >
+              No Data Found
+            </div>
           )}
         </Table>
       </TableContainer>
-      {bookingData.length == 0 && (
-        <>
-          <div className="UserBooking_Error">
-            <h3>No Booking Data To Show</h3>
-          </div>
-        </>
-      )}
     </>
   );
 }

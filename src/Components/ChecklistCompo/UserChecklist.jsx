@@ -10,13 +10,13 @@ import {
   Typography,
   IconButton,
   Checkbox,
-  duration,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import { toast } from "react-toastify";
 import { useGlobal } from "../../GlobalContext/GlobalProvider";
+import "./UserChecklist.css"; // For additional CSS
 
 const UserChecklist = () => {
   const {
@@ -44,9 +44,9 @@ const UserChecklist = () => {
 
   const handleAddTask = async () => {
     if (!text) {
-      toast.error("Required Field New-Task",{
-        position:"top-rigth",
-        duration:5000,
+      toast.error("Required Field New-Task", {
+        position: "top-right",
+        duration: 5000,
       });
     }
     try {
@@ -54,19 +54,19 @@ const UserChecklist = () => {
       await addUserCehckList(newCheckListData);
     } catch (err) {
       if (err.message == "Network Error") {
-        toast.error("Connection timeout! / DB not responding",{
-          position:"top-right",
-          duration:5000,
+        toast.error("Connection timeout! / DB not responding", {
+          position: "top-right",
+          duration: 5000,
         });
       } else if (err.response.status == 400) {
-        toast.error(err.response.data,{
-          position:"top-right",
-          duration:5000,
+        toast.error(err.response.data, {
+          position: "top-right",
+          duration: 5000,
         });
       } else {
-        toast.error(`Error while add new task ${err.message}`,{
-          position:"top-right",
-          duration:5000,
+        toast.error(`Error while add new task ${err.message}`, {
+          position: "top-right",
+          duration: 5000,
         });
       }
     }
@@ -78,19 +78,19 @@ const UserChecklist = () => {
       setTasks([]);
     } catch (err) {
       if (err.message == "Network Error") {
-        toast.error("Connection timeout! / DB not responding",{
-          position:"top-right",
-          duration:5000,
+        toast.error("Connection timeout! / DB not responding", {
+          position: "top-right",
+          duration: 5000,
         });
       } else if (err.response.status == 400) {
-        toast.error(err.response.data,{
-          position:"top-right",
-          duration:5000,
+        toast.error(err.response.data, {
+          position: "top-right",
+          duration: 5000,
         });
       } else {
-        toast.error(`Error while deleting task ${err.message}`,{
-          position:"top-right",
-          duration:5000,
+        toast.error(`Error while deleting task ${err.message}`, {
+          position: "top-right",
+          duration: 5000,
         });
       }
     }
@@ -105,38 +105,28 @@ const UserChecklist = () => {
     const task = tasks[index];
     const _id = task._id;
     try {
-      if (task.completed == false) {
-        const updatedChecklist = {
-          text: editedTask,
-          completed: false,
-        };
-        await editUserCheckList(_id, updatedChecklist);
-        setIsEditing(null);
-        setEditedTask("");
-      } else {
-        const updatedChecklist = {
-          text: editedTask,
-          completed: true,
-        };
-        await editUserCheckList(_id, updatedChecklist);
-        setIsEditing(null);
-        setEditedTask("");
-      }
+      const updatedChecklist = {
+        text: editedTask,
+        completed: task.completed,
+      };
+      await editUserCheckList(_id, updatedChecklist);
+      setIsEditing(null);
+      setEditedTask("");
     } catch (err) {
       if (err.message == "Network Error") {
-        toast.error("Connection timeout! / DB not responding",{
-          position:"top-right",
-          duration:5000,
+        toast.error("Connection timeout! / DB not responding", {
+          position: "top-right",
+          duration: 5000,
         });
       } else if (err.response.status == 400) {
-        toast.error(err.response.data,{
-          position:"top-right",
-          duration:5000,
+        toast.error(err.response.data, {
+          position: "top-right",
+          duration: 5000,
         });
       } else {
-        toast.error(`Error while Creating task ${err.message}`,{
-          position:"top-right",
-          duration:5000,
+        toast.error(`Error while editing task ${err.message}`, {
+          position: "top-right",
+          duration: 5000,
         });
       }
     }
@@ -163,12 +153,26 @@ const UserChecklist = () => {
   };
 
   return (
-    <Card sx={{ width: "100%", maxWidth: 600, margin: "2rem auto", p: 2 }}>
+    <Card
+      sx={{
+        width: "100%",
+        maxWidth: 600,
+        margin: "2rem auto",
+        p: 2,
+        backgroundColor: "skyblue",
+      }}
+    >
       <CardContent>
         <Typography
           variant="h5"
           component="div"
-          sx={{ textAlign: "center", mb: 2 }}
+          sx={{
+            textAlign: "center",
+            mb: 2,
+            color: "black",
+            fontSize: "24px",
+            fontFamily: "Times New Roman",
+          }}
         >
           Personalized Cleaning UserChecklist
         </Typography>
@@ -179,12 +183,21 @@ const UserChecklist = () => {
             label="Add a new task"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            sx={{
+              backgroundColor: "white",
+              fontFamily: "Times New Roman",
+              fontSize: "16px",
+            }}
           />
           <Button
             variant="contained"
             color="primary"
             onClick={handleAddTask}
-            sx={{ ml: 2 }}
+            sx={{
+              ml: 2,
+              fontFamily: "Times New Roman",
+              fontSize: "16px",
+            }}
           >
             Add
           </Button>
@@ -193,7 +206,12 @@ const UserChecklist = () => {
           {tasks.map((task, index) => (
             <ListItem
               key={task._id}
-              sx={{ display: "flex", alignItems: "center" }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                animation: "fadeIn 0.5s",
+              }}
+              className="fadeIn"
             >
               <Checkbox
                 checked={task.completed}
@@ -203,13 +221,22 @@ const UserChecklist = () => {
                 <TextField
                   value={editedTask}
                   onChange={(e) => setEditedTask(e.target.value)}
-                  sx={{ flex: 1, mr: 2 }}
+                  sx={{
+                    flex: 1,
+                    mr: 2,
+                    fontFamily: "Times New Roman",
+                    fontSize: "16px",
+                    color: "black",
+                  }}
                 />
               ) : (
                 <Typography
                   sx={{
                     flex: 1,
                     textDecoration: task.completed ? "line-through" : "none",
+                    fontFamily: "Times New Roman",
+                    fontSize: "16px",
+                    color: "black",
                   }}
                 >
                   {task.text}
