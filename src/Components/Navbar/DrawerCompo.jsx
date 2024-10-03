@@ -1,19 +1,11 @@
 import React, { useState } from "react";
-import { Drawer, IconButton } from "@mui/material";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
+import { Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Divider, Badge, Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import LogoutIcon from "@mui/icons-material/Logout";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Badge from "@mui/material/Badge";
 import { useGlobal } from "../../GlobalContext/GlobalProvider";
 
 function DrawerCompo({ data }) {
@@ -23,70 +15,41 @@ function DrawerCompo({ data }) {
 
   return (
     <>
-      <Box
-        sx={{ width: 250 }}
-        role="presentation"
-        onClick={() => setOpenDrawer(false)}
+      <Drawer
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        sx={{
+          "& .MuiDrawer-paper": {
+            backgroundColor: "#063970", // Background color
+            color: "#fff", // Text color
+            paddingRight: "2.5rem",
+          },
+        }}
       >
-        <Drawer
-          open={openDrawer}
-          onClose={() => setOpenDrawer(false)}
-          sx={{
-            "& .MuiDrawer-paper": {
-              backgroundColor: "#063970", // Background color
-              color: "#fff", // Text color
-              paddingRight: "2.5rem",
-            },
-          }}
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={() => setOpenDrawer(false)}
         >
           <List>
-            {data.length === 3 &&
-              data.map((ele) => (
-                <ListItem key={ele.name} disablePadding>
-                  <ListItemButton
-                    onClick={() => navigate(`${ele.path}`)}
-                    sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
-                  >
-                    <ListItemIcon sx={{ color: "white" }}>
-                      {ele.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={ele.name} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-
-            {data.length === 4 &&
-              data.map((ele) => (
-                <ListItem key={ele.name} disablePadding>
-                  <ListItemButton
-                    onClick={() => navigate(`${ele.path}`)}
-                    sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
-                  >
-                    <ListItemIcon sx={{ color: "white" }}>
-                      {ele.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={ele.name} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-
-            {data.length === 6 &&
-              data.map((ele) => (
-                <ListItem key={ele.name} disablePadding>
-                  <ListItemButton
-                    onClick={() => navigate(`${ele.path}`)}
-                    sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
-                  >
-                    <ListItemIcon sx={{ color: "white" }}>
-                      {ele.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={ele.name} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
+            {data.map((ele) => (
+              <ListItem key={ele.name} disablePadding>
+                <ListItemButton
+                  onClick={() => navigate(`${ele.path}`)}
+                  sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
+                >
+                  <ListItemIcon sx={{ color: "white" }}>
+                    {ele.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={ele.name} />
+                </ListItemButton>
+              </ListItem>
+            ))}
           </List>
+
           <Divider />
-          {data.length === 3 && (
+
+          {data.length <= 3 && (
             <List>
               <ListItem disablePadding>
                 <ListItemButton
@@ -112,7 +75,8 @@ function DrawerCompo({ data }) {
               </ListItem>
             </List>
           )}
-          {data.length === 6 && (
+
+          {data.length > 3 && (
             <List>
               <ListItem disablePadding>
                 <ListItemButton
@@ -143,24 +107,9 @@ function DrawerCompo({ data }) {
               </ListItem>
             </List>
           )}
+        </Box>
+      </Drawer>
 
-          {data.length === 4 && (
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton
-                  onClick={() => navigate(`/admin-logout`)}
-                  sx={{ fontFamily: "Times New Roman", fontSize: "18px" }}
-                >
-                  <ListItemIcon sx={{ color: "white" }}>
-                    <LogoutIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Log Out" />
-                </ListItemButton>
-              </ListItem>
-            </List>
-          )}
-        </Drawer>
-      </Box>
       <IconButton
         sx={{ marginLeft: "auto" }}
         color="inherit"

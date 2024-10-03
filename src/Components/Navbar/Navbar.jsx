@@ -42,7 +42,7 @@ function Navbar({ value, setValue }) {
       name: "Bookings",
       path: "/user-bookings",
     },
-    { icon: <ChecklistIcon />, name: "Checklist", path: "/user-checklist" },
+    // { icon: <ChecklistIcon />, name: "Checklist", path: "/user-checklist" },
   ];
 
   const noUserNavigatePath = [

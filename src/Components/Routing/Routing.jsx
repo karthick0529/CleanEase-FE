@@ -33,7 +33,7 @@ function Routing() {
     <>
       <Routes>
         <Route path="/" element={<Home />}/>  {/* //CHART//URL COUNT//TOTAK CLICK COUNT//URL CREATED PER DAY FOR PAST MONTH// */}
-        <Route path='/:cleanServiceID' element={<ServicePage/>}/>
+        //*<Route path='/:cleanServiceID' element={<ServicePage/>}/>*//
         <Route path='/user-review/:_id' element={<UserReviewTabel/>}/>
         <Route path='/about' element={<AboutUsPage/>}/>
         <Route path="/contact" element={<ContactPage/>}/>
@@ -50,7 +50,7 @@ function Routing() {
           <Route path='/user-booking/edit/:id' element={<UserBookingEdit/>}/>
           <Route path='/user-create-booking/:cleanSubCategoriesID' element={<BookingPage/>}/>
           <Route path='/user-create-review/:_id' element={<AddReview/>}/>
-          <Route path='/user-cehcklist' element={<UserCheckList/>}/>
+          {/* <Route path='/user-cehcklist' element={<UserCheckList/>}/> */}
           <Route path='/user-update-review/:_id' element={<UpdateReview/>}/>
           <Route path='/logout' element={<Logout/>}/>
         </Route>
