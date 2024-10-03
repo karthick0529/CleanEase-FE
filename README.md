@@ -13,7 +13,7 @@ Currently, two official plugins are available:
 ## 🚀 Overview
 This repository contains the frontend of a functional cleaning service booking platform. The application is designed with a focus on providing a smooth and intuitive user experience. Built with React.js, it features a responsive design, interactive components, and an elegant UI.
 
-**NETLIFY-URL --> https://regal-tartufo-ceec92.netlify.app/**
+**NETLIFY-URL --> https://peaceful-fox-47c57d.netlify.app/**
 
 ## 🧰 Tech Stack
 - **React.js** ⚛️: JavaScript library for building user interfaces.
