@@ -206,8 +206,8 @@ function GlobalProvider({ children }) {
 
 // SOCKET.IO  //NOTIFICATION
 useEffect(() => {
-  // const socket = io("https://cleanease-backend-780q.onrender.com", {
-      const socket = io("http://localhost:3000", {
+  const socket = io("https://sparklepro-be.onrender.com", {
+      // const socket = io("http://localhost:3000", {
     transports: ["websocket", "polling"],
     withCredentials: true,
   });
